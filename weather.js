@@ -1,18 +1,28 @@
-// Weather Underground API key: 4c48a6b8955d04a6
-
 // Require modules
-const http = require('http');
+const https = require('https');
+const api = require('./api.json');
 
-// Connect to the API
-const request = http.get(`http://api.wunderground.com/api/4c48a6b8955d04a6/conditions/q/CA/San_Francisco.json`,
-      response => {
-        // Read the data
-        let body = '';
-        response.on('data', data => {
-          body += data.toString();
-        });
+// Print out temp details
+// Print out error message
 
-        response.on('end', () => {
-          console.log(body);
+function get(query) {
+  // Connect to the API
+  const request = https.get(`https://api.wunderground.com/api/${api.key}/conditions/q/${query}.json`,
+        response => {
+          // Read the data
+          let body = '';
+          response.on('data', chunk => {
+            body += chunk.toString();
+          });
+
+          response.on('end', () => {
+            console.log(body);
+            // Parse data
+            // Print the data
+          });
         });
-      });
+}
+
+module.exports.get = get;
+
+// TODO: Handle any errors
