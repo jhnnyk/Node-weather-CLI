@@ -4,7 +4,8 @@ const api = require('./api.json');
 
 // Print out temp details
 function printMessage(city, temp) {
-  console.log(`It is currently ${temp} in ${city}.`);
+  const message = `It is currently ${temp}F in ${city}.`;
+  console.log(message);
 }
 // Print out error message
 
