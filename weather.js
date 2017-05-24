@@ -3,6 +3,9 @@ const https = require('https');
 const api = require('./api.json');
 
 // Print out temp details
+function printMessage(city, temp) {
+  console.log(`It is currently ${temp} in ${city}.`);
+}
 // Print out error message
 
 function get(query) {
@@ -16,9 +19,10 @@ function get(query) {
           });
 
           response.on('end', () => {
-            console.log(body);
             // Parse data
+            const conditions = JSON.parse(body);
             // Print the data
+            printMessage(conditions.current_observation.display_location.full, conditions.current_observation.temp_f);
           });
         });
 }
