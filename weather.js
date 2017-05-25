@@ -31,8 +31,9 @@ function get(query) {
               try {
                 // Parse data
                 const conditions = JSON.parse(body);
+
                 // Print the data
-                if (conditions.location) {
+                if (!!conditions.current_observation) {
                   printMessage(conditions.current_observation.display_location.full, conditions.current_observation.temp_f);
                 } else {
                   const queryError = new Error(`The location "${readableQuery}" was not found.`);
